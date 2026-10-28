@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vicente Bravo · Physics Engineer</title>
+<meta name="description" content="Portfolio of Vicente Bravo: physics engineer, detector electronics, simulation and scientific computing.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b0f14; --card:#111821; --text:#d6e2f0; --muted:#7d8ea3; --line:#1e2a38;
+  --accent:#3ddc97; --accent2:#4cc9f0; --boson:#ff7a7a; --quark:#b69cff; --shadow:0 10px 30px rgba(0,0,0,.4); color-scheme:dark;
+}
+:root[data-theme="light"]{
+  --bg:#f3f6f9; --card:#ffffff; --text:#17202b; --muted:#5d6b7c; --line:#dbe2ea;
+  --accent:#0a9e68; --accent2:#0a7ea8; --boson:#d64545; --quark:#7050d8; --shadow:0 10px 30px rgba(20,30,50,.08); color-scheme:light;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{font-family:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;font-size:15px;background:var(--bg);color:var(--text);line-height:1.7;transition:background .3s,color .3s}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:44px 44px;opacity:.35;mask-image:radial-gradient(ellipse at 50% 20%,#000 0,transparent 75%);-webkit-mask-image:radial-gradient(ellipse at 50% 20%,#000 0,transparent 75%)}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+section{padding:78px 0}
+h2{font-size:clamp(1.4rem,3.5vw,1.9rem);margin-bottom:4px}
+h2 .pre{color:var(--accent)}
+.sub{color:var(--muted);margin-bottom:34px}
+.sub::before{content:"// ";color:var(--accent)}
+.grad{background:linear-gradient(120deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:58px}
+.logo{font-weight:700}.logo b{color:var(--accent)}
+.links{display:flex;gap:20px}
+.links a{color:var(--muted);font-size:.85rem;transition:color .2s}
+.links a:hover{color:var(--accent)}
+.icon-btn{min-width:36px;height:36px;padding:0 9px;border-radius:8px;border:1px solid var(--line);background:var(--card);font-size:.8rem;font-weight:700}
+.icon-btn:hover{border-color:var(--accent)}
+#burger{display:none}
+@media(max-width:900px){
+  #burger{display:inline-block}
+  .links{position:absolute;top:58px;left:0;right:0;flex-direction:column;gap:0;background:var(--card);border-bottom:1px solid var(--line);max-height:0;overflow:hidden;transition:max-height .3s}
+  .links.open{max-height:420px}.links a{padding:13px 20px}
+}
+
+#hero{position:relative;min-height:90vh;display:flex;align-items:center;padding:50px 0;overflow:hidden}
+#bg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+#evt{position:absolute;left:20px;bottom:14px;z-index:1;color:var(--muted);font-size:.72rem}
+#hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center}
+@media(max-width:860px){#hero .wrap{grid-template-columns:1fr}}
+.who{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.avatar{width:68px;height:68px;border-radius:50%;border:2px solid var(--accent);display:grid;place-items:center;font-weight:700;font-size:1.2rem;color:var(--accent);background:var(--card);position:relative;overflow:hidden;flex:none}
+.avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.open{display:inline-flex;align-items:center;gap:8px;font-size:.78rem;padding:4px 12px;border:1px solid var(--accent);border-radius:99px;color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,transparent)}
+.open i{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:pulse 1.6s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 60%,transparent)}100%{box-shadow:0 0 0 9px transparent}}
+.hello{color:var(--accent);margin-bottom:6px}
+h1{font-size:clamp(2rem,6.5vw,3.4rem);line-height:1.1;margin-bottom:12px}
+.role{color:var(--muted)}
+.bio{color:var(--muted);max-width:520px;margin:14px 0 26px}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{padding:11px 20px;border-radius:8px;font-weight:500;border:1px solid var(--line);background:var(--card);transition:transform .2s,border-color .2s}
+.btn:hover{transform:translateY(-2px);border-color:var(--accent)}
+.btn.primary{background:var(--accent);color:#04120b;border-color:var(--accent);font-weight:700}
+.term{background:#0a0d12;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);overflow:hidden;color:#d6e2f0}
+.term .bar{display:flex;gap:7px;padding:11px 14px;background:#131a24;border-bottom:1px solid #1e2a38}
+.term .bar i{width:11px;height:11px;border-radius:50%;background:#ff5f56}.term .bar i:nth-child(2){background:#ffbd2e}.term .bar i:nth-child(3){background:#27c93f}
+#term{padding:16px 18px;min-height:250px;font-size:.88rem}
+.ps{color:#3ddc97}.out{color:#8fa3ba;margin:0 0 8px 16px}
+.cursor{display:inline-block;width:8px;height:1em;background:var(--accent);vertical-align:-2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* Standard Model style tiles */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.tile{--c:var(--accent);position:relative;background:var(--card);border:1px solid var(--line);border-top:4px solid var(--c);border-radius:10px;padding:12px 16px 18px;text-align:center;transition:transform .25s,box-shadow .25s}
+.tile:hover{transform:translateY(-4px);box-shadow:0 0 24px color-mix(in srgb,var(--c) 25%,transparent)}
+.k-quark{--c:var(--quark)}.k-boson{--c:var(--boson)}
+.tm{display:flex;justify-content:space-between;font-size:.7rem;color:var(--muted)}
+.sym{font-size:2.6rem;font-weight:700;color:var(--c);line-height:1.3}
+.tile b{display:block;font-size:2rem;line-height:1.2}
+.tile .lbl{color:var(--muted);font-size:.8rem;display:block;margin-top:2px}
+
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.chip{padding:6px 14px;border-radius:6px;border:1px solid var(--line);background:var(--card);font-size:.82rem;color:var(--muted);transition:.2s}
+.chip.on,.chip:hover{border-color:var(--accent);color:var(--accent)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;transition:transform .25s,border-color .25s,box-shadow .25s}
+.card:hover{transform:translateY(-5px);border-color:var(--accent);box-shadow:var(--shadow)}
+.card.star{border-color:color-mix(in srgb,var(--accent) 60%,var(--line))}
+.thumb{position:relative;height:150px;color:var(--accent);background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 12%,var(--card)),var(--card));border-bottom:1px solid var(--line);overflow:hidden}
+.thumb svg,.thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.badge{position:absolute;left:10px;top:10px;z-index:2;font-size:.72rem;padding:2px 9px;border-radius:5px;background:var(--bg);border:1px solid var(--accent);color:var(--accent)}
+.body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:8px;flex:1}
+.body h3{font-size:1rem;line-height:1.4}
+.date{color:var(--accent2);font-size:.78rem}
+.body p{color:var(--muted);font-size:.86rem;flex:1}
+.tags{display:flex;gap:6px;flex-wrap:wrap}
+.tag{font-size:.72rem;padding:2px 9px;border-radius:5px;background:color-mix(in srgb,var(--accent) 12%,transparent);color:var(--accent)}
+.more{color:var(--accent);font-size:.85rem}
+.note{color:var(--muted)}.hidden{display:none}
+.info{display:flex;flex-direction:column;flex:1}
+.gbtn{align-self:flex-start;margin-top:6px;color:var(--accent);font-size:.82rem;border:1px solid var(--line);border-radius:6px;padding:4px 12px;transition:.2s}
+.gbtn:hover{border-color:var(--accent)}
+.gal{display:none}
+.card.open{grid-column:1/-1;flex-direction:row}
+.card.open .info{width:340px;flex:none}
+.card.open .gal{display:block;flex:1;border-left:1px solid var(--line);animation:gin .35s}
+@keyframes gin{from{opacity:0;transform:translateY(8px)}}
+.mosaic{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:clamp(72px,13vw,140px);gap:8px;padding:16px}
+.ph{position:relative;overflow:hidden;border-radius:8px;border:1px dashed var(--line);background:color-mix(in srgb,var(--accent) 5%,var(--card));display:grid;place-items:center;text-align:center;padding:6px;color:var(--muted);font-size:.68rem;line-height:1.35}
+.ph:first-child{grid-column:span 2;grid-row:span 2;font-size:.8rem}
+.ph span{opacity:.8}.ph em{display:block;font-style:normal}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;cursor:zoom-in;transition:transform .4s}
+.ph:hover img{transform:scale(1.06)}
+.lb{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.88);display:none;place-items:center;cursor:zoom-out}
+.lb.on{display:grid}.lb img{max-width:92vw;max-height:90vh;border-radius:8px}
+@media(max-width:760px){.ph:not(:first-child) em{display:none}.mosaic{padding:12px}.card.open{flex-direction:column}.card.open .info{width:auto}.card.open .gal{border-left:0;border-top:1px solid var(--line)}}
+
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px 44px}
+.skill .row{display:flex;justify-content:space-between;font-size:.86rem;margin-bottom:6px;gap:10px}
+.skill .row em{color:var(--muted);font-style:normal;text-align:right}
+.track{height:8px;background:var(--line);border-radius:4px;overflow:hidden}
+.track i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width 1.2s cubic-bezier(.2,.8,.2,1)}
+.langs{display:flex;gap:10px;flex-wrap:wrap;margin-top:34px}
+.lang{border:1px solid var(--line);background:var(--card);border-radius:8px;padding:8px 14px;font-size:.85rem}
+.lang span{color:var(--accent)}
+
+.pub{display:flex;gap:18px;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;overflow:hidden;margin-bottom:14px;font-size:.88rem}
+.pub .thumb{width:190px;height:auto;min-height:130px;flex:none;border-bottom:0;border-right:1px solid var(--line)}
+.pub .txt{padding:16px 18px 16px 0}
+.pub small{color:var(--accent2);display:block;margin-bottom:4px}
+@media(max-width:640px){.pub{flex-direction:column;gap:0}.pub .thumb{width:100%;height:120px;border-right:0;border-bottom:1px solid var(--line)}.pub .txt{padding:14px 18px}}
+
+.list{border-left:2px solid var(--line);padding-left:22px;display:grid;gap:22px}
+.item{position:relative}
+.item::before{content:"";position:absolute;left:-29px;top:8px;width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--bg)}
+.item h3{font-size:.98rem}.item p{color:var(--muted);font-size:.86rem}
+
+.contact{text-align:center}.contact .btns{justify-content:center}
+footer{padding:28px 0;text-align:center;color:var(--muted);font-size:.8rem;border-top:1px solid var(--line)}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}
+.reveal.show{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a href="#hero" class="logo"><b>&gt;</b> vicente<b>_</b></a>
+  <div class="links" id="links">
+    <a href="#about" data-i="n_about"></a><a href="#experience" data-i="n_experience"></a><a href="#skills" data-i="n_skills"></a>
+    <a href="#papers" data-i="n_papers"></a><a href="#education" data-i="n_education"></a><a href="#github">github</a><a href="#contact" data-i="n_contact"></a>
+  </div>
+  <div style="display:flex;gap:8px">
+    <button class="icon-btn" id="langBtn" aria-label="Language / Idioma">ES</button>
+    <button class="icon-btn" id="theme" aria-label="Theme">☀</button>
+    <button class="icon-btn" id="burger" aria-label="Menu">☰</button>
+  </div>
+</div></nav>
+
+<header id="hero">
+  <canvas id="bg"></canvas>
+  <div id="evt"></div>
+  <div class="wrap">
+    <div>
+      <div class="who">
+        <div class="avatar">VB<img id="foto" alt="Vicente Bravo" onerror="this.remove()"></div>
+        <span class="open"><i></i><span data-i="open"></span></span>
+      </div>
+      <p class="hello" data-i="hello"></p>
+      <h1 class="grad" id="nombre"></h1>
+      <p class="role" id="rol"></p>
+      <p class="bio" id="bio"></p>
+      <div class="btns">
+        <a class="btn primary" href="#experience" data-i="b_exp"></a>
+        <a class="btn" href="#contact" data-i="b_contact"></a>
+      </div>
+    </div>
+    <div class="term"><div class="bar"><i></i><i></i><i></i></div><div id="term"></div></div>
+  </div>
+</header>
+
+<section id="about"><div class="wrap reveal">
+  <h2><span class="pre">~/</span><span data-i="s_about"></span></h2><p class="sub" data-i="sub_about"></p>
+  <div class="stats" id="stats"></div>
+</div></section>
+
+<section id="experience"><div class="wrap reveal">
+  <h2><span class="pre">~/</span><span data-i="s_experience"></span></h2><p class="sub" data-i="sub_experience"></p>
+  <div class="chips" id="chips"></div>
+  <div class="grid" id="expGrid"></div>
+</div></section>
+
+<section id="skills"><div class="wrap reveal">
+  <h2><span class="pre">~/</span><span data-i="s_skills"></span></h2><p class="sub" data-i="sub_skills"></p>
+  <div class="skills" id="skillsBox"></div>
+  <div class="langs" id="langs"></div>
+</div></section>
+
+<section id="papers"><div class="wrap reveal">
+  <h2><span class="pre">~/</span><span data-i="s_papers"></span></h2><p class="sub" data-i="sub_papers"></p>
+  <div id="pubs"></div>
+</div></section>
+
+<section id="education"><div class="wrap reveal">
+  <h2><span class="pre">~/</span><span data-i="s_education"></span></h2><p class="sub" data-i="sub_education"></p>
+  <div class="list" id="edu"></div>
+</div></section>
+
+<section id="github"><div class="wrap reveal">
+  <h2><span class="pre">~/</span>github</h2><p class="sub" data-i="sub_github"></p>
+  <p class="note" id="ghNote"></p>
+  <div class="grid" id="ghGrid"></div>
+</div></section>
+
+<section id="contact"><div class="wrap reveal contact">
+  <h2><span class="pre">~/</span><span data-i="s_contact"></span></h2><p class="sub" data-i="sub_contact"></p>
+  <div class="btns" id="contactBtns"></div>
+</div></section>
+
+<footer>© <span id="year"></span> Vicente Bravo · <span data-i="footer"></span></footer>
+
+<div class="lb" id="lb"><img alt=""></div>
+
+<script>
+/* =========================================================
+   EDIT ONLY THIS SECTION: all your content lives here.
+   Texts with {en:"...", es:"..."} are translated by the ES/EN button.
+   foto:   your small profile picture (put the file in img/).
+   fotos:  prefix of the 6 gallery photos: img/cern -> img/cern1.jpg ... img/cern6.jpg
+   imagen: optional photo per card (e.g. "img/cern.jpg"). If the file
+           does not exist, a generated illustration is used instead.
+   tipo:   "atlas" | "spectrum" | "pcb" | "mesh" | "pulse" | "code" | "feynman"
+   ========================================================= */
+const PERFIL = {
+  nombre: "Vicente Bravo",
+  foto: "img/foto.jpg",
+  rol: { en: "Physics Engineer · B.Sc. Applied Physics · Particle Physics minor",
+         es: "Ingeniero Físico · Licenciado en Física Aplicada · minor en Física de Partículas" },
+  bio: { en: "Physics engineer from Santiago, Chile. I design and simulate front-end electronics for radiation detectors, and I enjoy scientific computing, from CERN-ROOT analysis to automated circuit and FEM simulations.",
+         es: "Ingeniero físico de Santiago, Chile. Diseño y simulo electrónica front-end para detectores de radiación y disfruto la computación científica, desde análisis con CERN-ROOT hasta simulaciones automatizadas de circuitos y FEM." },
+  github: "vicentemillar1003",
+  email: "v.millarbravo@uandresbello.edu",
+  linkedin: "https://www.linkedin.com/in/vicente-ignacio-millar-bravo-11919221a",
+  terminal: [
+    ["whoami", "vicente-bravo"],
+    ["cat education.txt", { en: "Universidad Andrés Bello · Physics Engineering", es: "Universidad Andrés Bello · Ingeniería Física" }],
+    ["ls interests/", { en: "detectors  front-end-electronics  particle-physics  simulation", es: "detectores  electronica-front-end  fisica-de-particulas  simulacion" }],
+    ["python run.py --lab cern", { en: "ATLAS cooling upgrade · summer student 2025 ✔", es: "mejora del enfriamiento de ATLAS · verano 2025 ✔" }]
+  ],
+  stats: [   /* tiles inspired by the Standard Model chart: k = quark | lepton | boson */
+    { valor: 6, sim: "t",  k: "quark",  m: "172.6 GeV", q: "+2/3", etiqueta: { en: "research & industry experiences", es: "experiencias de investigación e industria" } },
+    { valor: 1, sim: "γ",  k: "boson",  m: "0",         q: "0",    etiqueta: { en: "peer-reviewed paper published", es: "paper publicado con revisión por pares" } },
+    { valor: 3, sim: "W±", k: "boson",  m: "80.4 GeV",  q: "±1",   etiqueta: { en: "institutions: CERN · CCHEN · SAPHIR", es: "instituciones: CERN · CCHEN · SAPHIR" } },
+    { valor: 2, sim: "e⁻", k: "lepton", m: "0.511 MeV", q: "−1",   etiqueta: { en: "countries: Chile · Switzerland", es: "países: Chile · Suiza" } }
+  ],
+  experiencias: [
+    { org: "CERN", destacado: true, tipo: "atlas", imagen: "img/cern.jpg", fotos: "img/cern",
+      titulo: { en: "Summer Student · CERN, Geneva", es: "Estudiante de verano · CERN, Ginebra" },
+      fecha: { en: "Jun 2025 – Aug 2025", es: "Jun 2025 – Ago 2025" },
+      desc: { en: "Designed and built a thermal measurement system to characterize temperature variations across a heating element, a thermal interface material and a heat sink, to evaluate a new TIM candidate for the ATLAS Cooling System upgrade.",
+              es: "Diseñé y construí un sistema de medición térmica para caracterizar las variaciones de temperatura entre un elemento calefactor, un material de interfaz térmica y un disipador, con el fin de evaluar un nuevo candidato de TIM para la mejora del sistema de enfriamiento de ATLAS." },
+      tags: { en: ["Hardware design", "Sensor integration", "Data acquisition", "Thermal analysis"], es: ["Diseño de hardware", "Integración de sensores", "Adquisición de datos", "Análisis térmico"] } },
+    { org: "CERN", tipo: "code", imagen: "", fotos: "img/csc",
+      titulo: { en: "CERN School of Computing · Santiago", es: "Escuela de Computación del CERN · Santiago" },
+      fecha: { en: "Jan 2026", es: "Ene 2026" },
+      desc: { en: "Selected for the first edition of the CSC in Latin America (CERN · SAPHIR · PUC). Advanced scientific computing foundations and software development for international scientific environments.",
+              es: "Seleccionado para la primera edición de la CSC en Latinoamérica (CERN · SAPHIR · PUC). Profundicé en fundamentos de computación científica y desarrollo de software para entornos científicos internacionales." },
+      tags: { en: ["C++", "Data analysis", "Software development", "Databases"], es: ["C++", "Análisis de datos", "Desarrollo de software", "Bases de datos"] } },
+    { org: "CCHEN", tipo: "pcb", imagen: "", fotos: "img/cchen-ii-",
+      titulo: { en: "Intern II · CCHEN, Chilean Nuclear Energy Commission", es: "Práctica profesional II · CCHEN, Comisión Chilena de Energía Nuclear" },
+      fecha: { en: "Sep 2024 – Aug 2025", es: "Sep 2024 – Ago 2025" },
+      desc: { en: "Designed and simulated analog and digital electronics for a compact neutron monitor: constant-fraction discriminators and peak detectors, with simulations automated in Python and NGSpice.",
+              es: "Diseñé y simulé electrónica analógica y digital para un monitor compacto de neutrones: discriminadores de fracción constante y detectores de peak, con simulaciones automatizadas en Python y NGSpice." },
+      tags: { en: ["Analog design", "PCB design", "Python + NGSpice"], es: ["Diseño analógico", "Diseño de PCB", "Python + NGSpice"] } },
+    { org: "SAPHIR", tipo: "mesh", imagen: "", fotos: "img/saphir-ii-",
+      titulo: { en: "Intern II · SAPHIR Millennium Institute", es: "Pasantía II · Instituto Milenio SAPHIR" },
+      fecha: { en: "Jan 2025", es: "Ene 2025" },
+      desc: { en: "Ran structural and thermo-mechanical FEM simulations, automating FreeCAD with Python, to compare hexagonal and cylindrical water tanks for Cherenkov cosmic-ray detectors.",
+              es: "Realicé simulaciones estructurales y termomecánicas por elementos finitos (FEM), automatizando FreeCAD con Python, para comparar estanques de agua hexagonales y cilíndricos en detectores Cherenkov de rayos cósmicos." },
+      tags: { en: ["FEM", "FreeCAD", "Python automation"], es: ["FEM", "FreeCAD", "Automatización con Python"] } },
+    { org: "CCHEN", tipo: "pulse", imagen: "", fotos: "img/cchen-i-",
+      titulo: { en: "Intern I · CCHEN, Chilean Nuclear Energy Commission", es: "Práctica profesional I · CCHEN, Comisión Chilena de Energía Nuclear" },
+      fecha: { en: "Oct 2023 – Jul 2024", es: "Oct 2023 – Jul 2024" },
+      desc: { en: "Designed, simulated, assembled and wired charge-sensitive preamplifiers for gaseous neutron detectors: low-noise circuitry for detecting and discriminating ionizing radiation.",
+              es: "Diseñé, simulé, ensamblé y cableé preamplificadores sensibles a carga para detectores gaseosos de neutrones: circuitería de bajo ruido para detectar y discriminar radiación ionizante." },
+      tags: { en: ["PCB design", "Analog circuits", "Instrumentation"], es: ["Diseño de PCB", "Circuitos analógicos", "Instrumentación"] } },
+    { org: "SAPHIR", tipo: "spectrum", imagen: "", fotos: "img/saphir-i-",
+      titulo: { en: "Intern I · SAPHIR Millennium Institute", es: "Pasantía I · Instituto Milenio SAPHIR" },
+      fecha: { en: "Dec 2022 – Jan 2023", es: "Dic 2022 – Ene 2023" },
+      desc: { en: "Characterized two scintillator + PMT detectors in coincidence with a Na-22 source: pulse-height spectra, energy resolution and linearity, comparing organic and inorganic scintillators.",
+              es: "Caractericé dos detectores centelleador + PMT en coincidencia con una fuente de Na-22: espectros de altura de pulso, resolución en energía y linealidad, comparando centelladores orgánicos e inorgánicos." },
+      tags: { en: ["C++", "ROOT", "Data analysis", "Instrumentation"], es: ["C++", "ROOT", "Análisis de datos", "Instrumentación"] } }
+  ],
+  skills: [
+    { nombre: { en: "Python / OOP", es: "Python / POO" }, nivel: 85, nota: { en: "broad", es: "amplio" } },
+    { nombre: { en: "Analog circuit design (NGSpice)", es: "Diseño de circuitos analógicos (NGSpice)" }, nivel: 65, nota: { en: "intermediate", es: "intermedio" } },
+    { nombre: "CERN-ROOT", nivel: 65, nota: { en: "intermediate", es: "intermedio" } },
+    { nombre: "KiCad · Altium Designer", nivel: 65, nota: { en: "intermediate", es: "intermedio" } },
+    { nombre: "Bash", nivel: 60, nota: { en: "intermediate", es: "intermedio" } },
+    { nombre: "MadGraph + Pythia8 + Delphes", nivel: 55, nota: { en: "LHC-like pp simulation", es: "simulación pp tipo LHC" } },
+    { nombre: "Machine learning", nivel: 30, nota: { en: "basic · event discrimination", es: "básico · discriminación de eventos" } }
+  ],
+  idiomas: [
+    { n: { en: "Spanish", es: "Español" }, l: { en: "native", es: "nativo" } },
+    { n: { en: "English", es: "Inglés" },  l: "B2" },
+    { n: { en: "French", es: "Francés" },  l: "A1" }
+  ],
+  publicaciones: [   /* the citation text stays as published */
+    { tipo: "feynman", imagen: "",
+      estado: { en: "published · Astroparticle Physics 179: 103238 (2026)", es: "publicado · Astroparticle Physics 179: 103238 (2026)" },
+      texto: "F. López-Usquiano, F. Molina, J. Romero-Barrientos, M. Zambra, J. Ruiz-Pineda, P. Aguilera, L.A. González-Saavedra, V. Millar-Bravo, F. Aguilar-Carvajal, G. Prieto, et al. Field neutron spectroscopy of cosmic-ray neutrons in Chile using the CEFNEN portable spectrometer: Instrumentation and test at Las Campanas Observatory (2320 m.a.s.l.)." },
+    { tipo: "pcb", imagen: "",
+      estado: { en: "in review · undergraduate thesis, Universidad Andrés Bello", es: "en revisión · tesis de pregrado, Universidad Andrés Bello" },
+      texto: "V. Millar-Bravo. Design, Simulation and Assembly of Front End Electronics for Neutron Monitoring in Remote Locations." }
+  ],
+  educacion: [
+    { t: { en: "B.Sc. Applied Physics · Physics Engineering, Particle Physics minor", es: "Licenciatura en Física Aplicada · Ingeniería Física, minor en Física de Partículas" }, d: "Universidad Andrés Bello, Santiago · 2020 – 2026" },
+    { t: { en: "Radiological Protection Course, Level 2 (CUBEPRO 2)", es: "Curso de Protección Radiológica, Nivel 2 (CUBEPRO 2)" }, d: { en: "CCHEN · Jul 2026", es: "CCHEN · Jul 2026" } },
+    { t: "CERN School of Computing 2026", d: { en: "PUC · SAPHIR · CERN · Jan 2026", es: "PUC · SAPHIR · CERN · Ene 2026" } },
+    { t: { en: "High school, Scientific-Humanistic, Mathematics plan", es: "Enseñanza media Científico-Humanista, plan diferenciado de Matemáticas" }, d: "Colegio Polivalente Domingo Matte Mesías · 2015 – 2019" }
+  ]
+};
+
+const UI = {
+  en: { n_about: "about", n_experience: "experience", n_skills: "skills", n_papers: "papers", n_education: "education", n_contact: "contact",
+    open: "open to work", hello: "> hello, world. I am", b_exp: "./experience", b_contact: "./contact",
+    s_about: "about", sub_about: "the journey in numbers", s_experience: "experience", sub_experience: "detectors, electronics, simulation and computing",
+    s_skills: "skills", sub_skills: "what I use day to day", s_papers: "publications", sub_papers: "research output",
+    s_education: "education", sub_education: "degrees, schools and courses", sub_github: "latest repositories, loaded live from the GitHub API",
+    s_contact: "contact", sub_contact: "open to full-time roles and collaborations", footer: "handcrafted with HTML, CSS and JavaScript",
+    all: "all", loading: "loading…", nogh: "no public repositories yet.", ghfail: "could not load repositories right now.",
+    nodesc: "No description.", viewgh: "view on GitHub →", title: "Vicente Bravo · Physics Engineer",
+    gal_open: "▸ view photos", gal_close: "▾ hide photos", empty: "photo log not uploaded yet" },
+  es: { n_about: "sobre mí", n_experience: "experiencia", n_skills: "habilidades", n_papers: "papers", n_education: "educación", n_contact: "contacto",
+    open: "disponible para trabajar", hello: "> hola, mundo. soy", b_exp: "./experiencia", b_contact: "./contacto",
+    s_about: "sobre-mi", sub_about: "el camino en números", s_experience: "experiencia", sub_experience: "detectores, electrónica, simulación y computación",
+    s_skills: "habilidades", sub_skills: "lo que uso día a día", s_papers: "publicaciones", sub_papers: "producción científica",
+    s_education: "educación", sub_education: "títulos, escuelas y cursos", sub_github: "últimos repositorios, cargados en vivo desde la API de GitHub",
+    s_contact: "contacto", sub_contact: "abierto a trabajos de tiempo completo y colaboraciones", footer: "hecho a mano con HTML, CSS y JavaScript",
+    all: "todos", loading: "cargando…", nogh: "aún no hay repositorios públicos.", ghfail: "no se pudieron cargar los repositorios ahora.",
+    nodesc: "Sin descripción.", viewgh: "ver en GitHub →", title: "Vicente Bravo · Ingeniero Físico",
+    gal_open: "▸ ver fotos", gal_close: "▾ ocultar fotos", empty: "registro aún no subido" }
+};
+
+/* ---------- helpers ---------- */
+const $ = id => document.getElementById(id);
+const wait = ms => new Promise(r => setTimeout(r, ms));
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+let lang = null; try { lang = localStorage.getItem("lang"); } catch (e) {}
+if (lang !== "es" && lang !== "en") lang = (navigator.language || "en").toLowerCase().startsWith("es") ? "es" : "en";
+const L = o => (o && typeof o === "object" && !Array.isArray(o) && "en" in o) ? o[lang] : o;
+
+/* ---------- generated illustrations (fallback when no photo) ---------- */
+function arte(t){
+  let s = "";
+  const C = (r, o, w, d) => `<circle cx="200" cy="75" r="${r}" fill="none" stroke="currentColor" stroke-opacity="${o}" stroke-width="${w}" ${d ? `stroke-dasharray="${d}"` : ""}/>`;
+  const Ln = (a, b, c, d) => `<line x1="${a}" y1="${b}" x2="${c}" y2="${d}" stroke="currentColor" stroke-width="2"/>`;
+  if (t === "atlas"){
+    s += C(8, .9, 1) + C(20, .5, 1, "2 4") + C(30, .5, 1, "2 4") + C(46, .3, 9, "7 3") + C(60, .22, 9, "10 2") + C(76, .5, 1);
+    for (let i = 0; i < 14; i++){
+      const a = i * .45 + .15, R = 50 + (i * 29 % 60), d = .5 + (i % 3) * .25;
+      const ex = 200 + Math.cos(a + d * .5) * R * 1.6, ey = 75 + Math.sin(a + d * .5) * R;
+      const cx = 200 + Math.cos(a - d * .2) * R * .88, cy = 75 + Math.sin(a - d * .2) * R * .55;
+      s += `<path d="M200 75Q${cx} ${cy} ${ex} ${ey}" fill="none" stroke="currentColor" stroke-opacity=".7"/><circle cx="${ex}" cy="${ey}" r="2" fill="currentColor"/>`;
+    }
+    s += '<circle cx="200" cy="75" r="3" fill="currentColor"/>';
+  } else if (t === "pcb"){
+    ["M20 30H110V60H170", "M20 75H90V105H170", "M20 120H130V90H170", "M230 60H290V30H380", "M230 90H300V120H380", "M230 75H380"]
+      .forEach(d => s += `<path d="${d}" fill="none" stroke="currentColor" stroke-opacity=".7" stroke-width="2"/>`);
+    s += '<rect x="170" y="45" width="60" height="60" rx="4" fill="none" stroke="currentColor" stroke-width="2"/>';
+    [[20,30],[20,75],[20,120],[380,30],[380,75],[380,120]].forEach(([x, y]) => s += `<circle cx="${x}" cy="${y}" r="5" fill="currentColor"/>`);
+  } else if (t === "mesh"){
+    const P = (i, j) => [i * 25, 12 + j * 26 + 12 * Math.sin(i / 2.3 + j / 3)];
+    for (let i = 0; i < 16; i++) for (let j = 0; j < 5; j++){
+      const a = P(i, j), b = P(i + 1, j), c = P(i, j + 1), d = P(i + 1, j + 1);
+      s += `<path d="M${a}L${b}L${d}L${c}Z M${a}L${d}" fill="none" stroke="currentColor" stroke-opacity="${(.2 + j * .13).toFixed(2)}"/>`;
+    }
+  } else if (t === "pulse"){
+    let d = "M0 118";
+    [30, 120, 215, 300].forEach((x, i) => {
+      const h = 45 + (i * 17 % 40);
+      d += `L${x} 118L${x + 3} ${118 - h}`;
+      for (let k = 1; k <= 22; k++) d += `L${x + 3 + k * 4} ${(118 - h * Math.exp(-k / 7)).toFixed(1)}`;
+    });
+    s += `<path d="${d}L400 118" fill="none" stroke="currentColor" stroke-width="2"/>`;
+  } else if (t === "spectrum"){
+    for (let i = 0; i < 40; i++){
+      const h = 12 + Math.abs(Math.sin(i * 2.1)) * 6 + 70 * Math.exp(-(((i - 14) / 2.2) ** 2)) + 42 * Math.exp(-(((i - 29) / 1.8) ** 2));
+      s += `<rect x="${20 + i * 9}" y="${(135 - h).toFixed(1)}" width="7" height="${h.toFixed(1)}" fill="currentColor" fill-opacity=".55"/>`;
+    }
+    s += '<line x1="10" y1="135" x2="390" y2="135" stroke="currentColor"/>';
+  } else if (t === "feynman"){
+    s += Ln(40, 25, 150, 75) + Ln(40, 125, 150, 75) + Ln(250, 75, 360, 25) + Ln(250, 75, 360, 125);
+    let w = "M150 75"; for (let x = 154; x <= 250; x += 3) w += `L${x} ${(75 + 7 * Math.sin((x - 150) / 4)).toFixed(1)}`;
+    s += `<path d="${w}" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="150" cy="75" r="4" fill="currentColor"/><circle cx="250" cy="75" r="4" fill="currentColor"/>`;
+    [["e⁻", 18, 22], ["e⁺", 18, 138], ["γ", 195, 55], ["μ⁻", 364, 22], ["μ⁺", 364, 138]]
+      .forEach(([tx, x, y]) => s += `<text x="${x}" y="${y}" font-size="15" font-family="monospace" fill="currentColor">${tx}</text>`);
+  } else {
+    [120, 80, 160, 60, 140, 100, 70, 150].forEach((w, i) =>
+      s += `<rect x="${40 + (i % 3) * 22}" y="${18 + i * 15}" width="${w}" height="6" rx="3" fill="currentColor" fill-opacity="${(.35 + (i % 4) * .15).toFixed(2)}"/>`);
+    s += '<text x="290" y="105" font-size="72" fill="currentColor" fill-opacity=".25" font-family="monospace">{ }</text>';
+  }
+  return `<svg viewBox="0 0 400 150" preserveAspectRatio="xMidYMid slice" aria-hidden="true">${s}</svg>`;
+}
+const thumb = (tipo, img, alt, badge) =>
+  `<div class="thumb">${arte(tipo)}${img ? `<img src="${img}" alt="${esc(alt)}" loading="lazy" onerror="this.remove()">` : ""}${badge ? `<span class="badge">${badge}</span>` : ""}</div>`;
+
+/* ---------- hero: particle collisions (inspired by LHC event displays) ---------- */
+(function collider(){
+  const cv = $("bg"), g = cv.getContext("2d"), hud = $("evt");
+  let W, H, ev = [], last = -1e9, n = 100000 + Math.floor(Math.random() * 800000);
+  const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function size(){ W = cv.width = cv.offsetWidth; H = cv.height = cv.offsetHeight; }
+  size(); addEventListener("resize", size);
+  function spawn(t0){
+    const cx = W * (.2 + Math.random() * .6), cy = H * (.2 + Math.random() * .6), tr = [];
+    for (let i = 0, k = 8 + Math.floor(Math.random() * 7); i < k; i++){
+      const p = Math.random(), curv = (Math.random() < .5 ? -1 : 1) * (.006 + .05 * p * p), N = 30 + Math.floor(90 * (1 - p));
+      let x = cx, y = cy, ph = Math.random() * 6.283; const pts = [];
+      for (let j = 0; j < N; j++){ pts.push([x, y]); x += Math.cos(ph) * 4; y += Math.sin(ph) * 4; ph += curv; }
+      tr.push(pts);
+    }
+    ev.push({ t0, cx, cy, tr });
+    hud.textContent = `event ${String(++n).padStart(6, "0")} · √s = 13.6 TeV · B = 2 T`;
+  }
+  function frame(){
+    const now = performance.now();
+    g.clearRect(0, 0, W, H);
+    const cs = getComputedStyle(document.documentElement), c1 = cs.getPropertyValue("--accent").trim(), c2 = cs.getPropertyValue("--accent2").trim();
+    if (!still && now - last > 2800 && ev.length < 3){ spawn(now); last = now; }
+    ev = ev.filter(e => (now - e.t0) / 1000 < 4.4);
+    for (const e of ev){
+      const age = (now - e.t0) / 1000, fade = age > 3.2 ? Math.max(0, 1 - (age - 3.2) / 1.2) : 1;
+      g.lineWidth = 1.6;
+      if (age < .6){                      /* two beams approaching the vertex */
+        const d = (.6 - age) / .6 * 280;
+        g.strokeStyle = g.fillStyle = c1; g.globalAlpha = .8;
+        for (const s of [-1, 1]){
+          g.beginPath(); g.moveTo(e.cx + s * (d + 90), e.cy); g.lineTo(e.cx + s * d, e.cy); g.stroke();
+          g.beginPath(); g.arc(e.cx + s * d, e.cy, 3, 0, 6.3); g.fill();
+        }
+      } else {
+        const f = Math.min(1, (age - .6) / 1.4);
+        if (age < .9){ g.globalAlpha = (.9 - age) / .3 * .6; g.fillStyle = c2; g.beginPath(); g.arc(e.cx, e.cy, 6 + (age - .6) * 70, 0, 6.3); g.fill(); }
+        e.tr.forEach((pts, i) => {
+          const m = Math.max(2, Math.floor(f * pts.length));
+          g.strokeStyle = g.fillStyle = i % 3 ? c1 : c2; g.globalAlpha = .55 * fade;
+          g.beginPath(); g.moveTo(pts[0][0], pts[0][1]);
+          for (let j = 1; j < m; j++) g.lineTo(pts[j][0], pts[j][1]);
+          g.stroke();
+          g.beginPath(); g.arc(pts[m - 1][0], pts[m - 1][1], 2.4, 0, 6.3); g.fill();
+        });
+      }
+    }
+    g.globalAlpha = 1;
+    if (!still) requestAnimationFrame(frame);
+  }
+  if (still){ spawn(performance.now() - 2600); }
+  frame();
+})();
+
+/* ---------- animated terminal ---------- */
+let termTok = 0;
+async function term(){
+  const tok = ++termTok, el = $("term"); el.innerHTML = "";
+  for (const [cmd, out] of PERFIL.terminal){
+    const line = document.createElement("div");
+    line.innerHTML = '<span class="ps">$</span> <span class="cmd"></span>';
+    el.appendChild(line);
+    const c = line.querySelector(".cmd");
+    for (const ch of cmd){ c.textContent += ch; await wait(40); if (tok !== termTok) return; }
+    await wait(240); if (tok !== termTok) return;
+    const o = document.createElement("div"); o.className = "out"; o.textContent = L(out); el.appendChild(o);
+    await wait(360); if (tok !== termTok) return;
+  }
+  const last = document.createElement("div");
+  last.innerHTML = '<span class="ps">$</span> <span class="cursor"></span>'; el.appendChild(last);
+}
+
+/* ---------- section renderers ---------- */
+let filtro = "all", gh = "loading";
+const abiertas = new Set();   /* tarjetas con galería abierta */
+function contar(el){
+  const meta = +el.dataset.n, t0 = performance.now();
+  (function paso(t){
+    const p = Math.min((t - t0) / 1400, 1);
+    el.textContent = Math.round(meta * (1 - Math.pow(1 - p, 3)));
+    if (p < 1) requestAnimationFrame(paso);
+  })(t0);
+}
+function activate(root, anim){
+  root.querySelectorAll("[data-n]").forEach(b => anim ? contar(b) : b.textContent = b.dataset.n);
+  root.querySelectorAll("[data-w]").forEach(b => b.style.width = b.dataset.w + "%");
+}
+function nextExt(img){            /* prueba .jpg, .png, .webp, .jpeg antes de rendirse */
+  const E = ["jpg", "png", "webp", "jpeg"], i = (+img.dataset.e || 0) + 1;
+  if (i >= E.length){ img.remove(); return; }
+  img.dataset.e = i; img.src = img.dataset.b + "." + E[i];
+}
+function pintarExp(){
+  const orgs = ["all", ...new Set(PERFIL.experiencias.map(e => e.org))], T = UI[lang];
+  $("chips").innerHTML = orgs.map(o => `<button class="chip ${o === filtro ? "on" : ""}" data-o="${o}">${o === "all" ? T.all : o}</button>`).join("");
+  $("expGrid").innerHTML = PERFIL.experiencias.map((e, i) => ({ e, i })).filter(({ e }) => filtro === "all" || e.org === filtro).map(({ e, i }) => {
+    const open = abiertas.has(i);
+    const fotos = e.fotos ? [1, 2, 3, 4, 5, 6].map(n => `<div class="ph"><span>◫<em>${T.empty}</em></span>
+      <img data-b="${e.fotos}${n}" data-e="0" src="${e.fotos}${n}.jpg" alt="${esc(L(e.titulo))} ${n}" loading="lazy" onerror="nextExt(this)"></div>`).join("") : "";
+    return `<article class="card ${e.destacado ? "star" : ""} ${open ? "open" : ""}">
+      <div class="info">${thumb(e.tipo, e.imagen, L(e.titulo), e.org)}
+        <div class="body"><span class="date">${L(e.fecha)}</span><h3>${L(e.titulo)}</h3><p>${L(e.desc)}</p>
+        <div class="tags">${L(e.tags).map(t => `<span class="tag">${t}</span>`).join("")}</div>
+        ${e.fotos ? `<button class="gbtn" data-x="${i}" aria-expanded="${open}">${open ? T.gal_close : T.gal_open}</button>` : ""}</div></div>
+      ${e.fotos ? `<div class="gal"><div class="mosaic">${fotos}</div></div>` : ""}</article>`;
+  }).join("");
+}
+function pintarGH(){
+  const n = $("ghNote");
+  if (Array.isArray(gh)){
+    n.classList.add("hidden");
+    $("ghGrid").innerHTML = gh.map(x => `<article class="card"><div class="body"><h3>${esc(x.name)}</h3>
+      <p>${x.description ? esc(x.description) : UI[lang].nodesc}</p>
+      <div class="tags">${x.language ? `<span class="tag">${esc(x.language)}</span>` : ""}<span class="tag">★ ${x.stargazers_count}</span></div>
+      <a class="more" href="${x.html_url}" target="_blank" rel="noopener">${UI[lang].viewgh}</a></div></article>`).join("");
+  } else {
+    n.classList.remove("hidden");
+    n.textContent = UI[lang][gh === "loading" ? "loading" : gh === "empty" ? "nogh" : "ghfail"];
+  }
+}
+function renderAll(){
+  document.documentElement.lang = lang;
+  document.title = UI[lang].title;
+  document.querySelectorAll("[data-i]").forEach(e => e.textContent = UI[lang][e.dataset.i]);
+  $("langBtn").textContent = lang === "en" ? "ES" : "EN";
+  $("nombre").textContent = PERFIL.nombre;
+  $("rol").textContent = L(PERFIL.rol);
+  $("bio").textContent = L(PERFIL.bio);
+  $("stats").innerHTML = PERFIL.stats.map(s => `<div class="tile k-${s.k}"><div class="tm"><span>${s.m}</span><span>${s.q}</span></div>
+    <div class="sym">${s.sim}</div><b class="grad" data-n="${s.valor}">0</b><span class="lbl">${L(s.etiqueta)}</span></div>`).join("");
+  pintarExp();
+  $("skillsBox").innerHTML = PERFIL.skills.map(s =>
+    `<div class="skill"><div class="row"><span>${L(s.nombre)}</span><em>${L(s.nota)}</em></div><div class="track"><i data-w="${s.nivel}"></i></div></div>`).join("");
+  $("langs").innerHTML = PERFIL.idiomas.map(i => `<div class="lang">${L(i.n)} <span>${L(i.l)}</span></div>`).join("");
+  $("pubs").innerHTML = PERFIL.publicaciones.map(p =>
+    `<div class="pub">${thumb(p.tipo, p.imagen, "", "")}<div class="txt"><small>${L(p.estado)}</small>${p.texto}</div></div>`).join("");
+  $("edu").innerHTML = PERFIL.educacion.map(e => `<div class="item"><h3>${L(e.t)}</h3><p>${L(e.d)}</p></div>`).join("");
+  pintarGH();
+  $("contactBtns").innerHTML = [
+    `<a class="btn primary" href="mailto:${PERFIL.email}">✉ ${PERFIL.email}</a>`,
+    `<a class="btn" href="https://github.com/${PERFIL.github}" target="_blank" rel="noopener">GitHub</a>`,
+    `<a class="btn" href="${PERFIL.linkedin}" target="_blank" rel="noopener">LinkedIn</a>`].join("");
+  document.querySelectorAll(".reveal.show").forEach(r => activate(r, false));
+  term();
+}
+
+/* ---------- init & events ---------- */
+$("foto").src = PERFIL.foto;
+$("year").textContent = new Date().getFullYear();
+renderAll();
+
+fetch(`https://api.github.com/users/${PERFIL.github}/repos?sort=updated&per_page=30`)
+  .then(r => r.ok ? r.json() : Promise.reject())
+  .then(a => { const r = a.filter(x => !x.fork).slice(0, 6); gh = r.length ? r : "empty"; pintarGH(); })
+  .catch(() => { gh = "err"; pintarGH(); });
+
+$("chips").addEventListener("click", e => { if (e.target.dataset.o){ filtro = e.target.dataset.o; pintarExp(); } });
+$("expGrid").addEventListener("click", e => {
+  const b = e.target.closest(".gbtn"); if (!b) return;
+  const card = b.closest(".card"), open = !card.classList.contains("open");
+  card.classList.toggle("open", open); open ? abiertas.add(+b.dataset.x) : abiertas.delete(+b.dataset.x);
+  b.setAttribute("aria-expanded", open); b.textContent = open ? UI[lang].gal_close : UI[lang].gal_open;
+  if (open) setTimeout(() => card.scrollIntoView({ behavior: "smooth", block: "nearest" }), 60);
+});
+const lb = $("lb");
+document.addEventListener("click", e => {
+  if (e.target.matches(".ph img")){ lb.querySelector("img").src = e.target.src; lb.classList.add("on"); }
+  else lb.classList.remove("on");
+});
+addEventListener("keydown", e => { if (e.key === "Escape") lb.classList.remove("on"); });
+$("langBtn").onclick = () => { lang = lang === "en" ? "es" : "en"; try { localStorage.setItem("lang", lang); } catch (e) {} renderAll(); };
+
+function aplicarTema(t){ document.documentElement.dataset.theme = t; $("theme").textContent = t === "dark" ? "☀" : "☾"; }
+let tema = null; try { tema = localStorage.getItem("tema"); } catch (e) {}
+aplicarTema(tema || "dark");
+$("theme").onclick = () => {
+  const n = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+  aplicarTema(n); try { localStorage.setItem("tema", n); } catch (e) {}
+};
+
+$("burger").onclick = () => $("links").classList.toggle("open");
+$("links").onclick = () => $("links").classList.remove("open");
+const io = new IntersectionObserver(es => es.forEach(en => {
+  if (!en.isIntersecting) return;
+  en.target.classList.add("show"); activate(en.target, true); io.unobserve(en.target);
+}), { threshold: 0.15 });
+document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+</script>
+</body>
+</html>
