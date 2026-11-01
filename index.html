@@ -560,10 +560,25 @@ $("foto").src = PERFIL.foto;
 $("year").textContent = new Date().getFullYear();
 renderAll();
 
-fetch(`https://api.github.com/users/${PERFIL.github}/repos?sort=updated&per_page=30`)
-  .then(r => r.ok ? r.json() : Promise.reject())
-  .then(a => { const r = a.filter(x => !x.fork).slice(0, 6); gh = r.length ? r : "empty"; pintarGH(); })
+
+const EXCLUIR = /^fcc-/i;
+
+async function cargarRepos(){
+  let todos = [];
+  for (let page = 1; ; page++){
+    const r = await fetch(`https://api.github.com/users/${PERFIL.github}/repos?sort=updated&per_page=100&page=${page}`);
+    if (!r.ok) throw new Error("GitHub API");
+    const lote = await r.json();
+    todos = todos.concat(lote);
+    if (lote.length < 100) break;
+  }
+  return todos.filter(x => !x.fork && !EXCLUIR.test(x.name));
+}
+
+cargarRepos()
+  .then(r => { gh = r.length ? r : "empty"; pintarGH(); })
   .catch(() => { gh = "err"; pintarGH(); });
+  
 
 $("chips").addEventListener("click", e => { if (e.target.dataset.o){ filtro = e.target.dataset.o; pintarExp(); } });
 $("expGrid").addEventListener("click", e => {
