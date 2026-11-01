@@ -561,7 +561,7 @@ $("year").textContent = new Date().getFullYear();
 renderAll();
 
 
-const EXCLUIR = /^fcc-/i;
+const EXCLUIR = new RegExp(`^(fcc-|${PERFIL.github}\\.github\\.io$)`, "i");
 
 async function cargarRepos(){
   let todos = [];
